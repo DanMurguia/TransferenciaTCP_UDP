@@ -49,7 +49,6 @@ class Cliente
 }
 
 public static long getWrite(String file,long i,long begin,long end, DataOutputStream salida){
-    String a=file.split(".mp3")[0];
     long endPointer = 0L;
     byte[] data = null;
     try {
@@ -100,7 +99,7 @@ public static long getWrite(String file,long i,long begin,long end, DataOutputSt
     DataOutputStream salida = new DataOutputStream(conexion.getOutputStream());
     DataInputStream entrada = new DataInputStream(conexion.getInputStream());
 
-    String file = "./01. Stinkfist.mp3"; 
+    String file = "./perfil.jpg"; 
     long maxSize = 400;
 
     getSplitFile(file, maxSize, salida);

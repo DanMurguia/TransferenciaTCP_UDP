@@ -6,7 +6,6 @@ import java.lang.Thread;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.io.File;
-import java.io.ByteArrayOutputStream;
 
 class Servidor
 {
@@ -39,16 +38,17 @@ class Servidor
         DataOutputStream salida = new DataOutputStream(conexion.getOutputStream());
         DataInputStream entrada = new DataInputStream(conexion.getInputStream());
         String fname;
-	// recibe el tamaños de cada corte y el numero de cortes que se hicieron
+      	// recibe el tamaños de cada corte y el numero de cortes que se hicieron
         int namelen = entrada.readInt();
         byte[] buffernl = new byte[namelen];
         read(entrada,buffernl,0,namelen);
         fname = new String(buffernl,"UTF-8");
+        String[] tokens = fname.split("\\.(?=[^\\.]+$)");
         Long length = entrada.readLong();
         Long maxSize = entrada.readLong();
         Long count = entrada.readLong();
         Long offSet=0L;
-        raf = new RandomAccessFile(new File(fname+"_recons.mp3"),"rw");
+        raf = new RandomAccessFile(new File(tokens[0]+"_recons."+tokens[1]),"rw");
         for (int i = 0;i<count; i++) {
             byte[]buffer = new byte[1024];
             read(entrada,buffer,0,maxSize.intValue());
